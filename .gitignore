@@ -1,0 +1,16 @@
+# 本地导出脚本，不上传
+export_pdf.js
+export_pdf_multi.js
+
+# 旧板块残留图片，页面未引用
+images/bilibili-music.jpg
+images/radio-2000.jpg
+images/radio-2000-2.jpg
+images/rmrb-autumn.jpg
+images/ruderfinn-post.jpg
+images/ruderfinn-post2.jpg
+images/weibo-redbook.jpg
+
+# git 临时文件
+.pdf-parts
+.DS_Store

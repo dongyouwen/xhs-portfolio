@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>董悠文 · 写作者与声音叙事者</title>
+  <meta name="description" content="董悠文（Stella Dong）——写作者与声音叙事者。文字、播客与深度专题，作品集。">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #faf7f2;
+      --paper-2: #f3efe7;
+      --page: #fffdf8;
+      --ink: #1f1c18;
+      --ink-2: #3f3a33;
+      --ink-3: #736c63;
+      --red: #b03a2e;
+      --red-deep: #8e2e24;
+      --line: #e2dcd0;
+      --serif: 'Noto Serif SC', 'Songti SC', 'STSong', serif;
+      --sans: 'Noto Sans SC', 'PingFang SC', sans-serif;
+      --latin: 'Playfair Display', 'Noto Serif SC', serif;
+      --transition: all .6s cubic-bezier(.23,1,.32,1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    ::selection { background: rgba(176,58,46,.14); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: var(--transition); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .08s; }
+    .reveal-delay-2 { transition-delay: .16s; }
+    .reveal-delay-3 { transition-delay: .24s; }
+
+    /* ===== Nav ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 22px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(250,247,242,.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 48px;
+      border-bottom: 1px solid var(--line);
+    }
+    nav .logo {
+      font-family: var(--serif);
+      font-weight: 700; font-size: 1.02rem; letter-spacing: .12em;
+      color: var(--ink); text-decoration: none;
+    }
+    nav .logo em { font-style: normal; color: var(--red); }
+    nav .links { display: flex; gap: 30px; align-items: center; }
+    nav .links a {
+      text-decoration: none; color: var(--ink-2);
+      font-size: .86rem; letter-spacing: .08em;
+      transition: var(--transition); position: relative;
+    }
+    nav .links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--red); transition: var(--transition);
+    }
+    nav .links a:hover { color: var(--red); }
+    nav .links a:hover::after { width: 100%; }
+    @media (max-width: 720px) {
+      nav { padding: 16px 20px; }
+      nav .links { gap: 16px; }
+      nav .links a { font-size: .78rem; letter-spacing: .04em; }
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 120px 24px 80px; position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -30%; right: -10%;
+      width: 60%; height: 110%;
+      background: radial-gradient(ellipse, rgba(176,58,46,.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .name {
+      font-family: var(--latin); font-size: 1rem; letter-spacing: .28em;
+      color: var(--ink-2); margin-bottom: 20px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: var(--serif); font-weight: 900;
+      font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+      line-height: 1.35; letter-spacing: .06em;
+      margin-bottom: 30px;
+    }
+    .hero .sub {
+      font-size: 1.02rem; color: var(--ink-2); letter-spacing: .14em; margin-bottom: 54px;
+    }
+    .hero .motto {
+      font-family: var(--serif);
+      font-size: 1.05rem; color: var(--ink-3);
+      letter-spacing: .1em; line-height: 2.1;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 20px 34px;
+    }
+    .hero .scroll-cue {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      font-size: .75rem; letter-spacing: .4em; color: var(--ink-3); text-indent: .4em;
+      animation: cue 2.4s ease-in-out infinite;
+    }
+    @keyframes cue { 0%,100% { opacity: .35; transform: translate(-50%, 0);} 50% { opacity: 1; transform: translate(-50%, 6px);} }
+    .seal {
+      width: auto; padding: 0 16px; height: 46px; margin: 0 auto 30px;
+      background: var(--red); color: #fff;
+      font-family: var(--serif); font-size: 1.1rem; font-weight: 700;
+      letter-spacing: .3em; text-indent: .3em;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; box-shadow: 0 4px 16px rgba(176,58,46,.25);
+    }
+
+    /* ===== Section commons ===== */
+    section.block { padding: 110px 26px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .container-narrow { max-width: 940px; margin: 0 auto; }
+    .sec-head { margin-bottom: 60px; }
+    .sec-head .num {
+      font-family: var(--latin); font-style: italic;
+      color: var(--red); font-size: .95rem; letter-spacing: .2em; margin-bottom: 14px;
+    }
+    .sec-head h2 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(1.7rem, 3.4vw, 2.4rem); letter-spacing: .1em;
+    }
+    .sec-head .rule { width: 56px; height: 2px; background: var(--red); margin-top: 22px; }
+    .sec-head .lede { margin-top: 24px; color: var(--ink-2); font-size: .98rem; max-width: 640px; }
+
+    /* ===== 创作自述 ===== */
+    #about { background: var(--paper); }
+    .statement-text p {
+      font-family: var(--serif);
+      font-size: 1.13rem; font-weight: 500; line-height: 2.25; color: var(--ink);
+      text-indent: 2em;
+      margin-bottom: 2em; text-align: justify;
+    }
+    .statement-text p:last-child { margin-bottom: 0; }
+    .statement-sign {
+      margin-top: 44px; font-family: var(--serif);
+      color: var(--ink-3); font-size: .95rem; letter-spacing: .1em;
+    }
+    /* 创作自述小节（并入关于我） */
+    .statement-sub { margin-top: 52px; padding-top: 44px; border-top: 1px solid var(--line); }
+    .statement-sub .sub-title {
+      font-size: .8rem; letter-spacing: .26em; color: var(--red);
+      margin-bottom: 24px;
+    }
+    /* 技能分类网格 */
+    #skills { background: var(--paper-2); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px;
+    }
+    .skill-category {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+      padding: 30px 28px;
+    }
+    .skill-category h4 {
+      font-family: var(--serif); font-weight: 700; font-size: 1.02rem;
+      color: var(--ink); letter-spacing: .1em; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--line);
+    }
+    .skill-category ul { list-style: none; }
+    .skill-category ul li {
+      font-size: .9rem; color: var(--ink-2); line-height: 1.9;
+      padding: 7px 0; border-bottom: 1px dashed rgba(41,37,32,.12);
+    }
+    .skill-category ul li:last-child { border-bottom: none; }
+    @media (max-width: 960px) { .skills-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .skills-grid { grid-template-columns: 1fr; } }
+
+    /* ===== 作品 ===== */
+    #works { background: var(--paper-2); }
+    .work {
+      display: grid; grid-template-columns: 190px 1fr; gap: 52px;
+      padding: 72px 0; border-top: 1px solid var(--line);
+    }
+    .work:last-of-type { border-bottom: 1px solid var(--line); }
+    .work-meta { padding-top: 8px; }
+    .work-meta .no {
+      font-family: var(--latin); font-style: italic;
+      font-size: 2.2rem; color: var(--red); line-height: 1;
+    }
+    .work-meta .period { margin-top: 16px; font-size: .82rem; color: var(--ink-2); letter-spacing: .06em; }
+    .work-meta .place { margin-top: 4px; font-size: .82rem; color: var(--ink-3); letter-spacing: .06em; }
+    .work-body h3 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(1.4rem, 2.6vw, 1.85rem); letter-spacing: .06em;
+      margin-bottom: 8px;
+    }
+    .work-body .role {
+      font-size: .88rem; color: var(--red); letter-spacing: .1em; margin-bottom: 22px;
+    }
+    .work-body .desc {
+      font-size: .98rem; color: var(--ink-2); line-height: 2.05; margin-bottom: 22px;
+    }
+    .work-body ul.detail { list-style: none; margin-bottom: 26px; }
+    .work-body ul.detail li {
+      position: relative; padding-left: 26px;
+      font-size: .92rem; color: var(--ink-2); line-height: 2; margin-bottom: 10px;
+    }
+    .work-body ul.detail li strong {
+      font-family: var(--serif); font-weight: 600; color: var(--ink);
+      font-size: .98rem; letter-spacing: .04em;
+    }
+    .work-body ul.detail li::before {
+      content: '—'; position: absolute; left: 0; color: var(--red);
+    }
+    .work-body .links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+    .work-body .links a {
+      font-size: .82rem; color: var(--red); text-decoration: none;
+      border: 1px solid rgba(176,58,46,.4); border-radius: 999px;
+      padding: 6px 18px; letter-spacing: .05em; transition: var(--transition);
+    }
+    .work-body .links a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .work-images { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+    .work-images img { width: 100%; display: block; border-radius: 6px; border: 1px solid var(--line); }
+    .work-images .caption {
+      grid-column: 1 / -1; font-size: .78rem; color: var(--ink-3);
+      text-align: center; letter-spacing: .06em; margin-top: 2px;
+    }
+    .work-images.single { grid-template-columns: 1fr; }
+    @media (max-width: 860px) {
+      section.block { padding: 72px 18px; }
+      .work { grid-template-columns: 1fr; gap: 22px; padding: 52px 0; }
+      .work-meta { display: flex; gap: 18px; align-items: baseline; padding-top: 0; }
+      .work-meta .period, .work-meta .place { margin-top: 0; }
+    }
+
+    /* ===== 写作样例 ===== */
+    #writing { background: var(--paper); }
+    .writing-intro { color: var(--ink-2); font-size: .96rem; margin-bottom: 48px; max-width: 640px; }
+
+    /* —— 随笔长文页（杂志式） —— */
+    .essay {
+      background: var(--page);
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 60px rgba(31,28,24,.06);
+      max-width: 1020px; margin: 0 auto 100px;
+      padding: clamp(60px, 9vw, 110px) clamp(28px, 9vw, 120px) clamp(70px, 9vw, 120px);
+      position: relative;
+    }
+    .essay::before {
+      content: ''; position: absolute; inset: 14px;
+      border: 1px solid rgba(176,58,46,.14); pointer-events: none;
+    }
+    .essay p.essay-kicker {
+      text-align: center; font-size: .8rem; letter-spacing: .45em; text-indent: .45em;
+      color: var(--red); margin-bottom: 38px;
+    }
+    .essay-title {
+      font-family: var(--serif); font-weight: 900;
+      font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+      letter-spacing: .1em; text-align: center; line-height: 1.5;
+      color: var(--ink);
+    }
+    .essay p.essay-byline {
+      text-align: center; font-family: var(--serif);
+      color: var(--ink-2); font-size: .95rem; letter-spacing: .2em;
+      margin-top: 22px;
+    }
+    .essay-rule {
+      width: 46px; height: 1px; background: var(--red);
+      margin: 44px auto 52px;
+    }
+    .essay p {
+      font-family: var(--serif);
+      font-size: 1.06rem; line-height: 2.25; color: #292520;
+      margin-bottom: 2.3em; text-align: justify; text-indent: 2em;
+    }
+    .essay p.lede {
+      font-size: 1.16rem; line-height: 2.3; text-indent: 0;
+      border-left: 2px solid var(--red); padding-left: 26px;
+      color: var(--ink); margin-bottom: 2.6em;
+    }
+    .essay p.essay-sub {
+      text-indent: 0; text-align: left; font-weight: 700;
+      font-size: 1.15rem; color: var(--ink); letter-spacing: .08em;
+      margin: 2.2em 0 .8em;
+    }
+    .essay p.q {
+      text-align: left; color: var(--ink);
+      font-weight: 400; letter-spacing: .06em; text-indent: 0;
+      border-left: 2px solid var(--red); padding-left: 18px;
+    }
+    .essay p:last-child { margin-bottom: 0; }
+    @media (max-width: 640px) {
+      .essay p, .essay p.lede { text-align: left; }
+    }
+
+    /* —— 其余样例条目 —— */
+    .writing-item {
+      max-width: 940px; margin: 0 auto 64px;
+      padding: 44px 52px; background: var(--page);
+      border: 1px solid var(--line); border-radius: 10px;
+    }
+    .writing-item:last-child { margin-bottom: 0; }
+    .writing-item .label {
+      font-size: .78rem; letter-spacing: .3em; color: var(--red); margin-bottom: 14px;
+    }
+    .writing-item h3 {
+      font-family: var(--serif); font-weight: 700; font-size: 1.35rem;
+      letter-spacing: .05em; margin-bottom: 6px;
+    }
+    .writing-item .source { font-size: .86rem; font-weight: 500; color: var(--ink-2); margin-bottom: 20px; }
+    .writing-item .editor-note {
+      font-family: var(--serif); font-size: .97rem; font-weight: 500; line-height: 2.1;
+      color: var(--ink-2); border-left: 2px solid var(--red);
+      padding-left: 20px; margin-bottom: 24px;
+    }
+    .placeholder {
+      border: 1px dashed rgba(176,58,46,.45); border-radius: 8px;
+      padding: 34px 24px; text-align: center;
+      color: var(--ink-3); font-size: .92rem; letter-spacing: .12em;
+      background: rgba(176,58,46,.03);
+    }
+    /* —— 视频文字稿 —— */
+    .script-body { margin-top: 4px; }
+    .script-body .seg { margin-bottom: 30px; }
+    .script-body .seg:last-child { margin-bottom: 0; }
+    .script-body .seg-head {
+      font-size: .78rem; letter-spacing: .22em; color: var(--red);
+      margin-bottom: 10px;
+    }
+    .script-body .seg-head .tc { color: var(--ink-3); letter-spacing: .06em; margin-left: 8px; }
+    .script-body p.script-text {
+      font-family: var(--serif); font-size: 1.02rem; font-weight: 500; line-height: 2.15;
+      color: #292520; margin-bottom: 12px; text-align: justify;
+    }
+    .script-body p.script-text:last-child { margin-bottom: 0; }
+    .script-body strong.speaker { color: var(--ink); font-weight: 600; }
+    .script-body .seg-note { font-size: .8rem; color: var(--ink-3); margin-top: 6px; }
+    .script-body .cue { font-style: italic; color: var(--ink-3); }
+    .script-body .cn-line { font-family: var(--serif); }
+    .script-body.copy-body p.script-text { text-align: left; line-height: 2.35; letter-spacing: .02em; }
+    .expand-btn {
+      display: inline-block; font-size: .85rem; letter-spacing: .2em;
+      color: var(--red); background: none;
+      border: 1px solid rgba(176,58,46,.4); border-radius: 999px;
+      padding: 9px 26px; cursor: pointer; font-family: inherit;
+      transition: var(--transition);
+    }
+    .expand-btn:hover { color: var(--red-deep); border-color: var(--red-deep); background: rgba(176,58,46,.04); }
+    #script-full[hidden] { display: none; }
+    .writing-item .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .writing-item .links a {
+      font-size: .82rem; color: var(--red); text-decoration: none;
+      border-bottom: 1px solid rgba(176,58,46,.4); padding-bottom: 2px;
+      transition: var(--transition);
+    }
+    .writing-item .links a:hover { color: var(--red-deep); border-color: var(--red-deep); }
+
+    /* ===== 项目一览 ===== */
+    #toc .toc-list { max-width: 940px; }
+    .toc-row {
+      display: flex; align-items: baseline; gap: 16px;
+      padding: 17px 8px; border-bottom: 1px solid var(--line);
+      text-decoration: none; color: var(--ink); transition: var(--transition);
+    }
+    .toc-row:first-child { border-top: 1px solid var(--line); }
+    .toc-row:hover { background: rgba(176,58,46,.035); padding-left: 16px; }
+    .toc-row .t-no { font-family: var(--latin); font-style: italic; color: var(--red); font-size: .95rem; min-width: 30px; }
+    .toc-row .t-title { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; letter-spacing: .04em; line-height: 1.5; }
+    .toc-row .t-sub { display: block; font-size: .82rem; font-weight: 500; color: var(--ink-2); letter-spacing: .06em; margin-top: 3px; font-family: inherit; }
+    .toc-row .t-dots { flex: 1; border-bottom: 1px dotted rgba(41,37,32,.3); transform: translateY(-5px); min-width: 36px; }
+    .toc-row .t-go { font-family: var(--latin); font-size: .76rem; color: var(--ink-3); letter-spacing: .18em; white-space: nowrap; }
+    .toc-row:hover .t-go { color: var(--red); }
+    /* 重点条目 */
+    .toc-row.hot { background: rgba(176,58,46,.05); border-left: 2px solid var(--red); }
+    .toc-row.hot .t-no { color: var(--red-deep); }
+    .toc-row.hot .t-title { color: var(--red-deep); }
+    .toc-row .t-star { color: var(--red); font-size: .82rem; margin-right: 8px; }
+
+    /* ===== 第25小时 ===== */
+    #hour25 { background: #211d18; color: #efe9df; }
+    #hour25 .sec-head h2 { color: #f5f0e6; }
+    #hour25 .sec-head .num { color: #d9a05b; }
+    #hour25 .sec-head .rule { background: #d9a05b; }
+    #hour25 .lede { color: #b8b0a2; }
+    #hour25 .motto-line {
+      font-family: var(--serif); font-size: 1.15rem; letter-spacing: .12em;
+      color: #e8e1d4; margin-bottom: 40px; line-height: 2.1;
+    }
+    #hour25 .motto-line em { font-style: normal; color: #d9a05b; }
+    .hour-posts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .hour-post {
+      background: rgba(255,255,255,.04);
+      border: 1px dashed rgba(217,160,91,.4);
+      border-radius: 10px; padding: 34px 26px; min-height: 220px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .hour-post .pno { font-family: var(--latin); font-style: italic; color: #d9a05b; font-size: 1.1rem; margin-bottom: 14px; }
+    .hour-post .pbody { color: #9d968a; font-size: .88rem; letter-spacing: .14em; line-height: 2; }
+    #hour25 .footnote { margin-top: 34px; font-size: .84rem; color: #8a8375; letter-spacing: .06em; }
+    /* 通栏帖子（全文 + 展开交互） */
+    .hour-post.full { grid-column: 1 / -1; padding: 34px 38px; text-align: left; align-items: stretch; justify-content: flex-start; }
+    .hour-post .ptitle { font-family: var(--serif); font-size: 1.25rem; color: #f5f0e6; letter-spacing: .1em; margin-bottom: 10px; }
+    .hour-post .pnote { font-size: .78rem; color: #b09c7d; letter-spacing: .08em; margin-bottom: 16px; }
+    .hour-post.full .pbody { color: #d8d1c3; font-size: .95rem; letter-spacing: .03em; line-height: 2.2; margin-bottom: 14px; text-align: justify; }
+    .hour-post.full .pbody:last-child { margin-bottom: 0; }
+    .hour-post.full .expand-btn { color: #e0a95e; border-color: rgba(217,160,91,.5); }
+    .hour-post.full .expand-btn:hover { color: #f0c98a; border-color: #f0c98a; background: rgba(217,160,91,.08); }
+    #h25-full[hidden] { display: none; }
+    /* 图文帖子 */
+    .hour-post.photo { padding: 26px 26px 30px; align-items: stretch; justify-content: flex-start; text-align: left; }
+    .hour-post.photo .ptitle { font-size: 1.05rem; letter-spacing: .08em; margin-bottom: 16px; }
+    .post-imgs { display: grid; gap: 9px; justify-items: center; margin: 0 auto; max-width: 250px; }
+    .post-imgs.two { max-width: 340px; grid-template-columns: 1fr 1fr; }
+    .post-imgs img { width: 100%; display: block; border-radius: 5px; }
+    @media (max-width: 860px) { .hour-posts { grid-template-columns: 1fr; } }
+
+    /* ===== 教育背景 ===== */
+    #edu { background: var(--paper-2); }
+    .edu-list { max-width: 760px; }
+    .edu-item { display: grid; grid-template-columns: 190px 1fr; gap: 40px; padding: 34px 0; border-top: 1px solid var(--line); }
+    .edu-item:last-child { border-bottom: 1px solid var(--line); }
+    .edu-item .school {
+      font-family: var(--serif); font-weight: 700; font-size: 1.08rem; letter-spacing: .05em;
+    }
+    .edu-item .school .en { display: block; font-family: var(--latin); font-style: italic; font-weight: 400; font-size: .82rem; color: var(--ink-3); margin-top: 6px; }
+    .edu-item .what { font-size: .94rem; color: var(--ink-2); line-height: 2.05; }
+    @media (max-width: 860px) { .edu-item { grid-template-columns: 1fr; gap: 10px; } }
+
+    /* ===== About Me ===== */
+    .about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; max-width: 940px; }
+    .about-photo img { width: 100%; display: block; border-radius: 6px; border: 1px solid var(--line); }
+    .about-photo .photo-note { font-size: .78rem; color: var(--ink-3); letter-spacing: .1em; margin-top: 12px; text-align: center; }
+    .about-text p { font-family: var(--serif); font-size: 1.02rem; font-weight: 500; line-height: 2.1; color: var(--ink-2); margin-bottom: 18px; text-align: justify; }
+    .about-quote { border-left: 2px solid var(--red); padding-left: 20px; margin: 26px 0; }
+    .about-quote p { font-family: var(--serif); color: var(--ink); margin-bottom: 8px; }
+    .about-quote .author { font-size: .8rem; color: var(--ink-3); }
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 36px; } .about-photo { max-width: 300px; } }
+
+    /* ===== Footer ===== */
+    footer { background: #17140f; color: #efe9df; padding: 96px 48px 44px; }
+    .footer-inner { max-width: 1080px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr; gap: 72px; align-items: start; }
+    .footer-cta h2 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); letter-spacing: .08em; line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .footer-cta h2 .zh-sub { display: block; font-size: .62em; letter-spacing: .14em; color: #d9a05b; margin-top: 10px; }
+    .footer-cta p { color: #a29a8c; font-size: .95rem; line-height: 2; margin-bottom: 40px; max-width: 560px; }
+    .footer-email {
+      font-family: var(--latin); font-size: 1.15rem; color: #d9a05b;
+      text-decoration: none; border-bottom: 1px solid rgba(217,160,91,.4);
+      padding-bottom: 4px; display: inline-flex; align-items: center; gap: 12px;
+      transition: var(--transition);
+    }
+    .footer-email:hover { color: #f0c185; border-color: #f0c185; gap: 20px; }
+    .footer-email .arrow { font-size: 1.4rem; }
+    .footer-mails { display: flex; flex-wrap: wrap; gap: 30px; }
+    .footer-mails a {
+      font-family: var(--latin); font-size: 1.05rem; color: #d9a05b;
+      text-decoration: none; border-bottom: 1px solid rgba(217,160,91,.4);
+      padding-bottom: 4px; transition: var(--transition);
+    }
+    .footer-mails a:hover { color: #f0c185; border-color: #f0c185; }
+    .footer-info h3 { font-size: .8rem; letter-spacing: .3em; color: #a29a8c; margin-bottom: 18px; }
+    .footer-info p { font-size: .92rem; color: #b5ac9e; line-height: 2.05; margin-bottom: 6px; }
+    .footer-info .who { font-family: var(--serif); font-size: 1.05rem; color: #efe9df; letter-spacing: .06em; }
+    .footer-base {
+      border-top: 1px solid rgba(255,255,255,.08); padding-top: 26px; margin-top: 72px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      font-size: .8rem; color: #7a7365; letter-spacing: .08em;
+    }
+    .footer-base .back-top { cursor: pointer; transition: var(--transition); }
+    .footer-base .back-top:hover { color: #d9a05b; }
+    @media (max-width: 860px) { .footer-top { grid-template-columns: 1fr; gap: 44px; } }
+    @media (max-width: 720px) { footer { padding: 64px 20px 36px; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="#top">第<em>25</em>小时 · 董悠文</a>
+  <div class="links">
+    <a href="#about">关于我</a>
+    <a href="#works">作品</a>
+    <a href="#writing">写作样例</a>
+    <a href="#hour25">第25小时</a>
+    <a href="#skills">技能</a>
+    <a href="#contact">联系</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="seal">董悠文</div>
+  <p class="name">Youwen Dong · Stella</p>
+  <h1>用文字与声音，<br>记录普通人的生活。</h1>
+  <p class="sub">观察 / 聆听 / 记录 —— 上海</p>
+  <p class="motto">「在 24 小时之外，还有第 25 个小时，用来想象。」<br>—— 我的个人创作理念。</p>
+  <p class="scroll-cue">向下翻阅</p>
+</header>
+
+<!-- ============ 项目一览 ============ -->
+<section class="block" id="toc">
+  <div class="container-narrow">
+    <div class="sec-head reveal">
+      <p class="num">CONTENTS</p>
+      <h2>项目一览</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="toc-list">
+      <a class="toc-row reveal" href="#about">
+        <span class="t-no">01</span>
+        <span class="t-title">关于我 · About Me<span class="t-sub">一名写作者的自画像与创作自述</span></span>
+        <span class="t-dots"></span>
+        <span class="t-go">ABOUT</span>
+      </a>
+      <a class="toc-row reveal" href="#works">
+        <span class="t-no">02</span>
+        <span class="t-title">作品经历<span class="t-sub">WE CALL___ 播客 ｜ 人民网 · 澳新深度专题</span></span>
+        <span class="t-dots"></span>
+        <span class="t-go">WORKS</span>
+      </a>
+      <a class="toc-row hot reveal" href="#writing">
+        <span class="t-no">03</span>
+        <span class="t-title"><span class="t-star">★</span>写作样例<span class="t-sub">随笔全文 · 专题节选 · 播客脚本 · 品牌文案</span></span>
+        <span class="t-dots"></span>
+        <span class="t-go">WRITING</span>
+      </a>
+      <a class="toc-row hot reveal" href="#hour25">
+        <span class="t-no">04</span>
+        <span class="t-title"><span class="t-star">★</span>第25小时 · 为自己写的字<span class="t-sub">在 24 小时之外，留一个小时用来想象</span></span>
+        <span class="t-dots"></span>
+        <span class="t-go">THE 25TH HOUR</span>
+      </a>
+      <a class="toc-row reveal" href="#edu">
+        <span class="t-no">05</span>
+        <span class="t-title">教育背景<span class="t-sub">悉尼大学 · 媒体实践硕士 ｜ Luiss · PPE</span></span>
+        <span class="t-dots"></span>
+        <span class="t-go">EDUCATION</span>
+      </a>
+      <a class="toc-row reveal" href="#skills">
+        <span class="t-no">06</span>
+        <span class="t-title">技能<span class="t-sub">在写作之外，也能带来一点什么</span></span>
+        <span class="t-dots"></span>
+        <span class="t-go">SKILLS</span>
+      </a>
+      <a class="toc-row reveal" href="#contact">
+        <span class="t-no">07</span>
+        <span class="t-title">联系<span class="t-sub">一起创造故事。</span></span>
+        <span class="t-dots"></span>
+        <span class="t-go">CONTACT</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 关于我 ============ -->
+<section class="block" id="about">
+  <div class="container-narrow">
+    <div class="sec-head reveal">
+      <p class="num">01 / ABOUT ME</p>
+      <h2>关于我</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo reveal reveal-delay-1">
+        <img src="images/hero-portrait.jpg" alt="董悠文 Stella">
+        <p class="photo-note">董悠文 Youwen Dong · Stella</p>
+      </div>
+      <div class="about-text">
+        <p class="reveal reveal-delay-1">我是董悠文（Stella），一名中英文双语内容创作者，关注跨文化语境下的内容表达。过往经历涵盖市场营销、央媒新闻报道、高校社交媒体运营、社区电台主持及品牌传播项目。在实践中，我逐步积累了社交媒体策略、视频剪辑、播客制作及品牌叙事方面的经验。</p>
+        <p class="reveal reveal-delay-2">在过去几年的实践中，我在中国、意大利和澳大利亚均有内容创作经历，对中英文环境下的受众偏好有一定理解。累计完成 60 余件多媒体作品，其中一条 YouTube 视频播放量超过 13,000 次。我希望通过清晰、有温度的内容，降低跨文化沟通中的信息损耗，传递品牌故事。</p>
+        <div class="about-quote reveal reveal-delay-3">
+          <p>“在24小时之外，还有一个第25小时，用来想象。”</p>
+          <p class="author">—— 我的个人小红书账号「第25小时」的创作理念</p>
+        </div>
+      </div>
+    </div>
+    <div class="statement-sub">
+      <p class="sub-title reveal">创作自述 · STATEMENT</p>
+      <div class="statement-text">
+      <p class="reveal reveal-delay-1">我理解的文字，首先应该是良善的，并且服务于普通人的。在悉尼的华人电台做《时差快报》时，我每天想的问题是：刚落地的留学生听到这条消息，能不能少走一点弯路；身处他乡为异客的华人社区，能不能感受到一点家的温度。在人民网·澳新写「缤纷悉尼」灯光节时，我希望把一座城市的热闹，讲给隔着八个时区、想念家人的人听。我也访谈过许多普通的留学生和本地市民，他们的故事值得被认真写下来。</p>
+      <p class="reveal reveal-delay-2">写作对我来说，是对具体生活好好交代的一种态度。如果一篇散文日记、一篇专题报道、一期播客脚本能够被看到，能够被听懂，那这段文字本身就具有全部的意义。我认为在生活的24小时之外，一定有第25个小时用来记录这一切，想象一切发生。那个小时里写下的字，是我全部创作的起点。</p>
+      </div>
+      <p class="statement-sign reveal reveal-delay-2">—— 董悠文</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 作品 ============ -->
+<section class="block" id="works">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="num">02 / WORKS</p>
+      <h2>作品经历</h2>
+      <div class="rule"></div>
+      <p class="lede">从央媒一线到品牌传播，从大学校园到社区电台 —— 每一段经历都在塑造一个更完整的跨文化讲述者。这两段，是其中最想讲给你听的。</p>
+    </div>
+
+    <!-- 01 WE CALL___ -->
+    <article class="work reveal" id="w-podcast">
+      <div class="work-meta">
+        <p class="no">01</p>
+        <p class="period">独立项目</p>
+        <p class="place">Sydney / Shanghai</p>
+      </div>
+      <div class="work-body">
+        <h3>WE CALL___ 播客</h3>
+        <p class="role">主理人 · 策划 / 脚本 / 录制 / 视觉</p>
+        <p class="desc">一期独立策划与制作的音频叙事播客。借助 AI 工具，从故事构思、脚本撰写、录音混音，到封面与视觉系统，覆盖了完整的播客作品产出工作。从选题头脑风暴到文案打磨，我也把 ChatGPT、Claude 等 AIGC 工具融入创作流程。第一集《Delay, Map and Drunk Poet》以李白和诗歌为灵感，用声音构建一场跨越时空的对话，章节包括 The Drunk Poet、A Dragon from Dream、Travel, Moon &amp; More Wine、Boarding Call。</p>
+        <ul class="detail">
+          <li>全部脚本文案独立撰写：选题立意、章节结构、口播文本、串场与节奏设计</li>
+          <li>录音与后期：配音、混音、声音设计，把控叙事的呼吸感</li>
+          <li>视觉与品牌：封面、视觉识别系统与播客小站的设计与文案</li>
+          <li>AI 工具辅助创作：ChatGPT / Claude 辅助选题头脑风暴与文案初稿打磨</li>
+        </ul>
+        <div class="links">
+          <a href="https://soundcloud.com/stella-366031122/we-call-eposide-1-delay-map/s-Vqgbj0riSkx" target="_blank">SoundCloud 收听</a>
+          <a href="https://wecall.my.canva.site/we-call" target="_blank">播客小站</a>
+        </div>
+        <div class="work-images single">
+          <a href="https://wecall.my.canva.site/we-call" target="_blank" style="display:block;">
+            <img src="images/podcast-website.jpg?v=20261118" alt="WE CALL 播客小站">
+          </a>
+          <p class="caption">▲ WE CALL___ 播客小站（点击访问）</p>
+        </div>
+        <div class="audio-box" style="margin-top:14px;">
+          <div class="audio-cover" id="podcast-cover" style="max-width:360px;position:relative;">
+            <img src="images/podcast-cover-soundcloud.png" alt="WE CALL Ep.1 封面" style="width:100%;display:block;border-radius:6px;border:1px solid var(--line);">
+            <div class="audio-overlay" id="podcast-overlay" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.42);border-radius:6px;cursor:pointer;transition:all .3s ease;">
+              <div class="play-btn" id="podcast-play-btn" style="width:56px;height:56px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;margin-bottom:10px;">▶</div>
+              <p style="color:#fff;font-size:.85rem;letter-spacing:.15em;" id="podcast-play-text">点击试听 · 第一集</p>
+            </div>
+          </div>
+          <audio id="podcast-audio" preload="metadata" src="images/podcast-ep1.mp3"></audio>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 人民网 -->
+    <article class="work reveal" id="w-peoplesdaily">
+      <div class="work-meta">
+        <p class="no">02</p>
+        <p class="period">2026.04 – 2026.07</p>
+        <p class="place">Sydney · 人民网澳新</p>
+      </div>
+      <div class="work-body">
+        <h3>人民网 · 澳新</h3>
+        <p class="role">实习记者</p>
+        <p class="desc">以多媒体形式对澳大利亚地区的时政与文化类新闻进行实地报道，独立完成 20+ 篇中英文报道。其中包含有涉及「缤纷悉尼」灯光音乐节的视频报道以及许多活动的图文专题。采访写作、拍摄制作，我走进普通人生活，将普通的故事，讲得精彩。</p>
+        <ul class="detail">
+          <li><strong>热点策划与多媒体叙事</strong><br>深度挖掘「缤纷悉尼」灯光节、跨文化艺术展等时事热点素材，利用多媒体叙事（视频+图文）打造深度专题，实现品牌专题传播</li>
+          <li><strong>「遇见熊猫」视频征集活动</strong><br>负责该活动的投稿整理与初步筛选，从传播价值维度评估内容并整理参评名单</li>
+          <li><strong>中英双语内容策划</strong><br>针对海外受众进行中英双语编译，优化叙事框架以符合当地文化认知</li>
+        </ul>
+        <div class="links">
+          <a href="http://v.people.cn/n1/2026/0531/c239891-40730957.html" target="_blank">缤纷悉尼 · 视频报道（人民网）</a>
+          <a href="http://en.people.cn/n3/2026/0604/c98649-20463931.html" target="_blank">Vivid Sydney · English Report</a>
+          <a href="http://australia.people.com.cn/n1/2026/0629/c408038-40749214.html" target="_blank">跨文化艺术展 · 开幕报道</a>
+        </div>
+        <div class="work-images">
+          <img src="images/rmrb-vivid-sydney.jpg" alt="缤纷悉尼灯光节报道">
+          <img src="images/rmrb-art-exhibit.jpg" alt="跨文化艺术展报道">
+          <p class="caption">▲ 深度专题报道页面（节选展示见下方「写作样例 ②」）</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 写作样例 ============ -->
+<section class="block" id="writing">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="num">03 / SELECTED WRITING</p>
+      <h2>写作样例</h2>
+      <div class="rule"></div>
+      <p class="writing-intro">四件样例：一篇生活方式随笔（全文），一篇深度专题（节选），一段播客脚本（节选），一组品牌文案（节选）。随笔是这一页的主角——请像翻开一本杂志那样读它。</p>
+    </div>
+  </div>
+
+  <!-- ① 随笔全文 -->
+  <article class="essay reveal" id="essay">
+    <p class="essay-kicker">写作样例 ① · 生活方式随笔 · 全文</p>
+    <h2 class="essay-title">比真实，多一点点</h2>
+    <p class="essay-byline">—— 写于京沪高铁上</p>
+    <div class="essay-rule"></div>
+    <p class="lede">来北京的路上我在看幻想小说《鬼妈妈》的作者尼尔·盖曼的访谈，他有一句话我很喜欢，说的内容大概是：“好的文字，是要比你愿意展露出来的真实，再多给一点点。”</p>
+    <p>看到这句的时候，窗外的树已经开始变黄、变枯，变得很“北方”。密密麻麻的树干枯萎着，站立着，往后飞速掠过。然后广播开始通知：“列车即将到站。”</p>
+    <div style="text-align:center;margin:10px 0 0;"><button type="button" class="expand-btn" onclick="var m=document.getElementById('essay-full'),b=this; if(m.hasAttribute('hidden')){m.removeAttribute('hidden');b.textContent='收起全文 ▴';}else{m.setAttribute('hidden','');b.textContent='展开全文 ▾';}">展开全文 ▾</button></div>
+    <div id="essay-full" hidden>
+    <p>上（两）次来北京是好几年前了。如果记忆没有骗我，那次是受了语文课文《故都的秋》的影响，想在夹道的银杏中穿梭，结果天气太冷，遇见了故宫的初雪，最后在国家博物馆对着文物发呆。现在想来，好像每一次来北京，都是源于一个很细微的点，一个很“文艺”的触动。所以我对北京的印象，是由很碎片的东西拼接起来的，每次再试图由这些碎片出发，窥见这座城市的全貌。</p>
+    <p>相较而言，这次不太一样。这次的动力很模糊，出发得也比较匆忙。最初动了念头，是想弥补上次没看见银杏林的遗憾，于是很早就计划着秋天要来。可惜结果和大多数计划一样，流产在了很忙、很冲突的时间里。我原以为，错过这一片银杏林，今年应该是不会来了。但上周的某一天，我还是突然打开了铁路12306，买下一张票，约了当地的几个朋友。很幸运，几位朋友都恰好有空。所以在五环内四处乱转、到处赴约的时候，我才得以看见另一面的北京——那个比愿意展露出来的真实，再多一点点的北京。</p>
+    <p>以下，是我视角里很普通的记录，发生在我待在北京的这三天里。不正宗，北京的朋友请多包涵。</p>
+    <p class="essay-sub">我与出租车</p>
+    <p>到北京的第一个上午，我原本打算坐地铁去赴约，看见二十几分钟的步行距离时，这个想法直接被打消了。零下的天气里，我果断拿出手机，打了辆出租车。车来得很快，没让我在风中多等。拉开车门钻进去的时候，司机的工作热情和招呼声迎面而来：“来嘞？走着！”我刚关上门的下一秒，他一脚油门就飘了出去，直到转过一个弯才放慢速度——虽然我怀疑，是因为前方的车辆开始堵了起来。他很得意地从后视镜里看见后面的车被红灯拦下，顺便笑呵呵地和我打了个招呼：“咱们得快点儿，要不可被拦下了。”幸好，他没看见我已经带起来的保险带。不知道为什么，那个时候，脑子里突然响起了李宗盛的几首歌。</p>
+    <p class="essay-sub">我与豆汁</p>
+    <p>晚上，从被商业填满的南锣鼓巷往边上随便一拐，就是一条黑漆漆的小胡同。被风吹得七扭八歪的树影，把原本就不多的灯光筛走，前路更加不可见。和几辆电瓶车擦肩而过，再拐过几道弯，迎面一张红色酒旗在没有人的胡同里飘着，门口的喇叭传来充满京腔的叫卖：“炸灌肠、豆汁儿焦圈、大碗茶——”虽然这里只写了一个儿化音，但儿化音在我这个游客听来，像缀在了每个字的后面。而我这个游客的特色就是喜欢尝试，尤其是这种名声远扬、评论分化严重的东西。于是我钻进保暖的挂帘后面。四张桌子的小店里，只坐着喇叭声音的主人，看着外放声音很响的卖货直播。</p>
+    <p>“您好，一份豆汁焦圈，谢谢。”大爷瞥了我一眼，示意我随便坐，从冰箱里拿出一瓶豆汁。我知道它和传闻里的描述还有一定距离，但在心理作用的加持下，远远看过去好像还是泛着绿光。随便选了个角落坐下，刚给手机插上电，大爷已经热好了豆汁，捧着一碟咸菜和焦圈向我走来。“来嘞，豆汁儿焦圈。”他把小碗和碟子“老神在在”地往我面前一放，打眼一看就知道我是游客，直接开始劝说：“先来一大口，一定要大口喝，然后吃口咸菜咬口焦圈。别听网上那些瞎扯的，这好东西，好吃。”他说话期间，一股很淡的酸味儿，从温热的碗面、隔着漂浮的絮状豆渣钻进我的鼻腔。</p>
+    <p>我应了两声，正准备在他还算关心的注目下尝一口，一阵风从背后吹来，门帘悉悉索索地掀开。回头瞥了一眼，一个穿制服的人用非常北京的方式打了句我听不清的招呼，递给大爷一份文件。大爷挺体谅我这个正在“偷听”的顾客，接过文件又确认了一遍：“那个啥，电表没通过？得嘞，我再跑一趟。”“好嘞谢谢啊，回见。”等大爷送了客再转过头，他很满意地发现，这位唯一的顾客非常识货——碗里的豆汁儿已经下去大半。于是他又坐回椅子里，看外放声音很响的卖货直播。在主播激情四射的介绍声和窗外呼呼的风声里，我慢慢把这份豆汁儿焦圈，一口一口吃完了。</p>
+    <p class="essay-sub">我与红墙</p>
+    <p>最后一天，为了赶上下午的高铁，故宫八点半开门，我八点半准时出现在门口。冬天工作日的故宫真的很不错：人少，天蓝——除了风大，一切都很完美。手套在拍摄时一向碍事，所以被我理所当然地放在了酒店。零下的天里，我哆哆嗦嗦地拿出相机，四处找角度，拍到了一位在宫墙边短暂停留的工作人员。第 n 次把相机挂回脖子上、手缩进口袋回温的时候，故宫广播播报着今天的“蓝色大风警告”，我又一次经过照片主人公的身边，听见了他和同事疲惫的叹气——和我走了一天的路、经过北京金融街中心时的疲惫，如出一辙。好在就像开头说的那样，北京的冬天，天真的很蓝。大概在时针又一次指向故宫上方的皇天时，太阳终于把寒意驱散开去了一点。希望也可以把疲惫，驱散掉一点点吧。</p>
+    <p class="q">我到底是为什么来了北京？</p>
+    <p>上一次想看银杏，看见的是故宫的初雪；这一次想看银杏，在天坛著名的银杏大道上，看见的是一个干干的、枯枯的、“北方”的北京。它好像比之前几次愿意对我展露出来的真实，再多了一点点。</p>
+    <p class="q">那我下一次再来，能赶上那几个月，看见银杏叶吗？</p>
+    <p>大概是因为来北京的前几天，吃羊肉时嘴里被烫了一层皮，所以来了之后就在报仇，吃了好几次羊。那我再攒攒，下次再来的时候，应该可以看见整个北京城的银杏叶。</p>
+    <p>这些散记写到这里，开始写不下去。因为16:24的夕阳正在高铁进站时，用边上林立的高楼照镜子，晃得我眼睛疼；也因为列车广播开始播报：“前方到站，上海。”</p>
+    </div>
+  </article>
+
+  <!-- ② 专题节选 -->
+  <div class="container">
+    <article class="writing-item reveal" id="sample-vivid">
+      <p class="label">写作样例 ② · 深度专题节选</p>
+      <h3>中国留学生作品亮相「缤纷悉尼」灯光音乐节</h3>
+      <p class="source">人民网 · 澳新 ｜ 2026.06 ｜ 中文视频报道 &amp; 英文报道双语发布</p>
+      <p class="editor-note">编者按：这条新闻视频制作于「缤纷悉尼」灯光音乐节期间，讲述中国留学生的新媒体艺术作品登上 Vivid Sydney 舞台的故事。拍摄剪辑时我提醒自己：观众可能从未见过悉尼的夜，所以灯光不能只被“报道”，要被“看见”。以下是这条视频的完整文字稿——解说词与同期声。</p>
+      <div class="script-body">
+        <div class="seg">
+          <p class="seg-head">解说<span class="tc">00:08–00:28</span></p>
+          <p class="script-text">2026 年「缤纷悉尼」灯光音乐节于 5 月 22 日拉开帷幕。本届活动取消了统一主题规定，将展览自夜间延续至白天，以更加多元、开放的形式邀请来自全球的艺术家参与创作。活动首日就吸引了大量市民与游客，探索城市灯光和艺术装置。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">现场同期声 · 观众<span class="tc">00:34–01:06</span></p>
+          <p class="script-text"><strong class="speaker">悉尼市民（男）：</strong>我认为「缤纷悉尼」将人们聚在一起。它让许多家庭一起外出游玩、参与其中——观赏灯光秀、尝试各种食物。我认为这就是为什么这么多人来这里的原因。</p>
+          <p class="script-text"><strong class="speaker">悉尼市民：</strong>这就是一个可以从现实中短暂抽离、享受乐趣的夜晚。</p>
+          <p class="script-text"><strong class="speaker">游客（英语同期声，中文字幕）：</strong>观看这些漂亮绚烂的灯光，它展现了悉尼有多美丽，也体现了这座精彩城市丰富的内涵。这里非常适合和朋友家人一起来。</p>
+          <p class="script-text"><strong class="speaker">悉尼市民（女）：</strong>我大概已经连续八九年都来参加这个活动了。我觉得它每年都在变得越来越好：整体组织更加完善，安保措施也更到位，灯光秀的效果更是提升了很多。</p>
+        </div>
+        <div style="margin:2px 0 26px;"><button type="button" class="expand-btn" onclick="var m=document.getElementById('vivid-full'),b=this; if(m.hasAttribute('hidden')){m.removeAttribute('hidden');b.textContent='收起全文 ▴';}else{m.setAttribute('hidden','');b.textContent='展开全文 ▾';}">展开全文 ▾</button></div>
+        <div id="vivid-full" hidden>
+        <div class="seg">
+          <p class="seg-head">解说<span class="tc">01:12–01:21</span></p>
+          <p class="script-text">在今年的「缤纷悉尼」活动中，来自中国留学生创作的艺术作品受到关注。位于悉尼环形码头的灯光装置《Dear You》（《亲爱的你》），由三位来自悉尼大学的中国留学生设计创作。作品以漂流瓶中的发光信件为核心意象，向来到悉尼的人发出一封「来自城市的信」。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">主创访谈<span class="tc">01:27–01:56</span></p>
+          <p class="script-text"><strong class="speaker">主案设计师：</strong>当人们看到瓶子里那封发光的信时，我希望它可以把他们带入一种关于记忆和想象的状态。也许他们会想到自己第一次来悉尼的时候，想到和自己一起来的人。</p>
+          <p class="script-text"><strong class="speaker">主案设计师：</strong>对我来说，悉尼海港不仅仅是一个风景，它也是关于抵达、离开、等待和重逢的地方。</p>
+          <p class="script-text"><strong class="speaker">主案设计师：</strong>像环形码头这样非常具有标志性的区域，本身就充满了流动的人以及不同的故事。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">解说<span class="tc">02:01</span></p>
+          <p class="script-text">该作品从去年便已开始构思，为了准确传达艺术内涵，设计团队对作品进行了反复打磨。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">主创访谈<span class="tc">02:08–02:32</span></p>
+          <p class="script-text"><strong class="speaker">主案设计师：</strong>一开始我们想到了一个封闭玻璃瓶的意象；但大家也可以看到，最终呈现只有一个瓶子的轮廓。因为如果是玻璃瓶的话，瓶中的信可能会看不清楚。但我们认为，信的内容才是整个装置的灵魂和主体。</p>
+          <p class="script-text"><strong class="speaker">《Dear You》项目经理：</strong>然后我们把这个提案交给了主办方，经过大概一个半月至两个月的等待，入围了最终的候选名单。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">解说<span class="tc">02:36</span></p>
+          <p class="script-text">设计制造过程中，设计师团队克服了重重困难。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">主创访谈<span class="tc">02:39–03:09</span></p>
+          <p class="script-text"><strong class="speaker">体验设计师：</strong>我认为最大的困难应该是资源的整合。因为这个装置也是我们第一次在悉尼做的体量如此巨大的实体装置，所以对于生产、运输以及安装的要求都是非常高的。我们在过程中也找了非常多的厂家做配合，当然也有很多厂家对我们的体量比较没有把握，所以我们也是进行了多方的接洽，最后选择了这些厂家。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">解说 + 观众反馈<span class="tc">03:10–03:28</span></p>
+          <p class="script-text">最终作品呈现效果良好，有游客表示这一灯光装置引发了他们的情感共鸣。</p>
+          <p class="script-text"><strong class="speaker">印度留学生：</strong>我刚读到那段内容的时候，脑子里就在想，也许这就是我人生故事里新的一个开始。现在我一个人在澳大利亚生活，这像是人生新阶段的开端。虽然不一定一直在悉尼，但也许算是从悉尼出发吧。</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">解说 · 片尾<span class="tc">03:33–03:48</span></p>
+          <p class="script-text">今年「缤纷悉尼」灯光音乐节将持续至 6 月 13 日。活动期间，悉尼海港沿岸多处地标建筑及公共空间内，将持续呈现灯光投影、互动装置与现场活动。</p>
+        </div>
+        </div>
+        <p class="seg-note">记者：董悠文 ｜ 解说词为本人撰写；同期声由本人现场采访并编译为双语字幕。片长 3′48″。</p>
+      </div>
+      <div class="links">
+        <a href="http://v.people.cn/n1/2026/0531/c239891-40730957.html" target="_blank">阅读原文（视频报道 · 人民网）</a>
+        <a href="http://en.people.cn/n3/2026/0604/c98649-20463931.html" target="_blank">Read Online (English · People's Daily Online)</a>
+      </div>
+    </article>
+
+    <!-- ③ 播客脚本 -->
+    <article class="writing-item reveal" id="sample-script">
+      <p class="label">写作样例 ③ · 播客脚本</p>
+      <h3>《WE CALL___》播客脚本</h3>
+      <p class="source">WE CALL___ Podcast</p>
+      <p class="editor-note">编者按：播客脚本是写给耳朵的文字，以下是《WE Call___》第一集《Delay, Map and Drunk Poet》的完整脚本（英文原稿）。本期内容以机场延误的一幕开场，让李白从一千三百年前打来一通电话。李白的诗句以中文原句嵌入并配英文注释；成品音频可在上方「WE CALL___ 播客」板块试听。</p>
+      <div class="script-body script-en">
+        <div class="seg">
+          <p class="seg-head">SHOW INTRO<span class="tc">节目开场</span></p>
+          <p class="script-text">What if you could call anyone from history — and they actually picked up?</p>
+          <p class="script-text">Welcome to WE Call___, the podcast where the past isn’t past — it’s on the other end of the phone. Within every call to history, find your answer to life.</p>
+          <p class="script-text">In each episode, host Stella receives a mysterious call from an iconic figure — poets, philosophers, inventors, artists, rebels — and accidentally slips into a conversation that bridges centuries. From airport delays to dating, ambition, burnout and meaning, see what our modern lives look like through ancient eyes.</p>
+          <p class="script-text">So pick up the phone.</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">EPISODE 1 · DELAY, MAP, AND DRUNK POET<span class="tc">本集简介</span></p>
+          <p class="script-text">What if you could call anyone from history — and they actually picked up? Welcome to WE Call___, the podcast where the past isn’t past — it’s on the other end of the phone. Within every call to history, find your answer to life.</p>
+          <p class="script-text">A phone call at the airport turns out to be from… Li Bai, the legendary poet of ancient China. A surreal cross-time conversation about delays, maps, and the meaning of “direction” kicks off the first episode of WE Call___.</p>
+          <p class="seg-note">[PART ONE] THE DRUNK POET (01:07)　·　[PART TWO] A DRAGON FROM A DREAM (03:42)　·　[PART THREE] TRAVEL, MOON AND MORE WINE (05:32)　·　[PART FOUR] BOARDING CALL (08:17)</p>
+        </div>
+        <button type="button" class="expand-btn" onclick="var m=document.getElementById('script-full'),b=this; if(m.hasAttribute('hidden')){m.removeAttribute('hidden');b.textContent='收起全文 ▴';}else{m.setAttribute('hidden','');b.textContent='展开全文 ▾';}">展开全文 ▾</button>
+        <div id="script-full" hidden style="margin-top:28px;">
+          <div class="seg">
+            <p class="seg-head">NARRATION<span class="tc">00:00 / 00:21</span></p>
+            <p class="script-text">Hello, Welcome Back to WE Call___, this is Stella. Got a question about life? Within every call to these fantastic historical figures, you just might find your answer. Welcome aboard! This is the episode about Delay, Map, and Drunk Poet.</p>
+            <p class="script-text cue">(00:21) [Beginning Narration]</p>
+            <p class="script-text cue">(Broadcast Delaying Notice)</p>
+            <p class="script-text">It’s 7 a.m. at Sydney airport. Flight delayed. Again. I watch a man in a business suit arguing over a cup of coffee he didn’t order. A kid next to him cries because his toy airplane couldn’t fly.</p>
+            <p class="script-text">And there I am stuck. I leaned back in the chair and closed my eyes — and then, from the music still faintly playing in my earphones, a line from Li Bai drifted up, soft and distant:</p>
+            <p class="script-text cn-line">“举杯邀明月，对影成三人。”</p>
+            <p class="seg-note">(Translation: “Invite the moon to drink — there are three of us: me, and my shadow.”)</p>
+            <p class="script-text">And finally, fell asleep.</p>
+            <p class="script-text cue">(Making everything feel asleep…)</p>
+            <p class="script-text cue">(Phones)</p>
+          </div>
+          <div class="seg">
+            <p class="seg-head">[PART ONE] THE DRUNK POET<span class="tc">01:07</span></p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Hello? What is this…? Who are you?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “It’s you calling me… anyway, this is Stella, who are you?”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Oh Stella, this is Li Bai.”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Wait, who? Which Li Bai?”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Hey — who else could it be? The one who wrote all these fantastic poems and traveled everywhere for political ambitions! You have to know me — ah I see~ (pauses) You want an autograph right? Well, you’ll have to wait till I take another sip —— ahh… such a good wine!”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Wait… aren’t you supposed to be from the Tang Dynasty? I mean — how are you even here? I thought you… you know… well, retired thousands of years ago.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Don’t know.”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “So how are you even calling me? And why are you speaking English?”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Hey hey alright alright. （把酒杯放下声）It’s okay. Relax. To be honest, I don’t know either. You call this English… Thousands of years? What time and space are you in?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Well… it’s weird… Anyway, I’m speaking to you from the future — about thirteen hundred years ahead of your time. But I know you. You’re extremely famous in my time, people call you the Immortal Poet. In China, countless people love your poetry and admire your life.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Oh? Is that so? Hahaha! I spent my whole life traveling, hoping to serve my country and the people as an official. Yet what people remember me for… are all those poems I wrote and all those places I travelled while grumbling about my messy life!”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Well… you know… thinking of your exam to become an official… quite a few students also suffer because of you right now, hahaha, including me. You see, just like your imperial exams, we have something called the college entrance exam, and students have to memorize a lot of your poems. You did write a lot!!!”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Ahahaha! So my poetry has become a kind of pain in that way? Well then — a toast to those hardworking students of the future!”</p>
+          </div>
+          <div class="seg">
+            <p class="seg-head">[PART TWO] A DRAGON FROM A DREAM<span class="tc">03:42</span></p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “So what are you doing right now?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Me? Uh… this feels a bit hard to explain. Let me try. I’m about to travel, but right now I’m stuck at an airport — the plane, where our flying machines wait.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Flying machines? You can fly? Why are you waiting then?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Well… these ‘flying machines’ are named ‘planes’. And the plane’s delayed, so everyone’s just waiting around. Imagine this: a plane is like an iron bird that can fly across the sky to faraway lands.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Iron bird? Ah… sounds like a dragon from a dream! And it can really fly to distant lands? How far are we talking?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Hmm… well, right now I’m in Australia. Leaving your capital Chang’an by horse or by boat — it might take thirty years to get there. But with this ‘iron bird’? Only ten hours.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Ten hours?! I can barely ride out of a single province at that time! Back then, when I left the capital — after they said I had ‘acted inappropriately in political affairs’ and dismissed me — you can’t believe that, can you?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Emmm… Nah…”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Huh… They’ve got eyes but no vision.”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Then why do you like traveling and poetry so much?”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Why not! Those officials… I couldn’t stand them. Scheming and flattering all day, hiding behind masks, saying nothing true, doing nothing real. But riding into the mountains, sailing down rivers, seeking out beauty and wine — now that’s freedom!”</p>
+          </div>
+          <div class="seg">
+            <p class="seg-head">[PART THREE] TRAVEL, MOON AND MORE WINE<span class="tc">05:32</span></p>
+            <p class="script-text"><strong class="speaker">Singer:</strong> <span class="cn-line">“且放白鹿青崖间，须行即骑访名山。”</span></p>
+            <p class="seg-note">(Translation: “Amidst the emerald cliffs the white deer stray; mount your steed, and let the famed peaks guide your way.” — Let the white deer roam among the green cliffs; whenever I wish to travel, I’ll ride out to visit famous mountains.)</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Hey listen! My dear friends are singing my poems there! If they can hear you — I don’t know how — do you want to say hi to them?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Uhhh… Hi?”</p>
+            <p class="script-text cue">(Pause)</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Oops… sadly, we can tell they can’t hear you.”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “So you are just with other people?? They won’t feel you are weird??? Like talking to nobody and nowhere?”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Who knows… perhaps. But I always drink like this, hahaha! Oh alright! Where were we?… Ah right! We just talked about traveling… yes, travel… Mountains, rivers, wine, and company — what more could one want? Why stay chained to one place? However high the mountain is, however far the river is… these moments are just so fantastic!”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “That sounds… amazing. But have you ever been stuck somewhere? You mentioned the moments, right? How about the time lost on the way? Like me right now — I just want to travel, but the plane — that ‘iron bird’ — is delayed. Not flying at all. I feel like all my time is being wasted.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Time? Hah! What’s that supposed to mean? You’re waiting for a bird made of iron — I’m waiting for the moon. Same thing, isn’t it?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “I mean… not really?”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Tell me, how long are you ‘waiting’ then?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “I don’t know… depends. Maybe one or two hours if it’s good weather, or even until tomorrow if it’s bad.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “One day? Just one? I could spend three days in a roadside tavern and still not want to leave! Look — good wine, loud friends, someone playing the pipa in the corner… or even just stay there and look around. How could that ever be a waste of time?”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “That’s… that’s true.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “So what’s time anyway? Who cares? I only know: if I finish all the wines I have, I will find more on my next trip.”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “Wow… that’s… that sounds so poetic.”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> “Just drink, haha! Ah!! Look!! The moon is about to rise!! I must go. Nice to meet you, Stella!”</p>
+            <p class="script-text"><strong class="speaker">Host:</strong> “But wait…”</p>
+            <p class="script-text"><strong class="speaker">Li Bai:</strong> <span class="cn-line">“我醉欲眠卿且去……”</span></p>
+            <p class="seg-note">(Translation: “Drunk and drowsy, I wish to sleep — dear friend, you may take your leave.”)</p>
+            <p class="script-text cue">🎙️ [SFX: call drops — faint wind sound — airport noise fades back in, distant boarding announcement]</p>
+            <p class="script-text cue">(Pause… SFX)</p>
+          </div>
+          <div class="seg">
+            <p class="seg-head">[PART FOUR] BOARDING CALL<span class="tc">08:17</span></p>
+            <p class="script-text"><strong class="speaker">Host:</strong> I woke up with the boarding call echoing in the distance. Maybe it was a dream. Or maybe, somewhere across centuries, a drunk poet was also late for his flight. We’re all avoiding something — only he escapes into poetry, while I escape into the duty-free.</p>
+            <p class="script-text">The flight — yes, the very one I’m supposed to be on — is now starting to board.</p>
+          </div>
+        </div>
+      </div>
+      <div class="links">
+        <a href="https://soundcloud.com/stella-366031122/we-call-eposide-1-delay-map/s-Vqgbj0riSkx" target="_blank">▶ 收听本集成品（SoundCloud）</a>
+        <a href="#w-podcast">↩ 回到「WE CALL___ 播客」板块试听</a>
+      </div>
+    </article>
+
+    <!-- ④ 品牌文案节选 -->
+    <article class="writing-item reveal" id="sample-copy">
+      <p class="label">写作样例 ④ · 品牌 / 社媒文案</p>
+      <h3>罗德公关 × 世界黄金协会 · 「硬足金」KOL 视频转发文案</h3>
+      <p class="source">Ruder Finn ｜ 2024.06 – 2024.08 ｜ 「硬足金」品类传播 · 2024 中国国际黄金大会</p>
+      <p class="editor-note">编者按：品牌文案的难点不在于写得漂亮，而在于戴着品牌的镣铐，依然写到消费者的心里。以下是实习期间为世界黄金协会「硬足金」撰写的两段 KOL 视频转发文案——品牌要说的每一个卖点，都得先翻译成博主本人的语气。</p>
+      <div class="script-body copy-body">
+        <div class="seg">
+          <p class="seg-head">视频转发文案 · @碳酸饮料拜拜</p>
+          <p class="script-text">用硬足金开启一场换装游戏<br>陪你可爱陪你闹<br>百变硬核、轻盈闪亮<br>硬足金饰品全部适配<br>与 @碳酸饮料拜拜 一起尽情展现自己<br>享受每一个在闪光灯里的夏天</p>
+        </div>
+        <div class="seg">
+          <p class="seg-head">视频转发文案 · @三多同学</p>
+          <p class="script-text">硬足金饰品，闪耀你的时代<br>能够硬下心来专注<br>也有四两拨千斤的轻盈<br>敢于亮出自己的优秀<br>打造属于自己的时代<br>戴硬足金饰品<br>和 @三多同学 一起把握时代红利</p>
+        </div>
+      </div>
+      <p class="seg-note">以上文案为本人撰写；@碳酸饮料拜拜、@三多同学 为本次传播合作的博主。</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 第25小时 ============ -->
+<section class="block" id="hour25">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="num">04 / THE 25TH HOUR</p>
+      <h2>第25小时 · 为自己写的字</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="motto-line reveal reveal-delay-1">「第25小时」是我的个人小红书账号——<em>不为流量、为自己写的字</em>。<br>它没有运营数据要汇报，也不是一个案例；它存在的意义只有一件事：<br>在 24 小时之外，留出一个小时，用来想象。</p>
+    <div class="hour-posts">
+      <div class="hour-post full reveal reveal-delay-1">
+        <p class="pno">No.1</p>
+        <p class="ptitle">第一次喝酒</p>
+        <p class="pnote">未成年人禁止饮酒｜以下经历中的“酒”为“无酒精饮料”。</p>
+        <p class="pbody">我第一次接触到8+1（无醇饮料），应该在大概十岁左右。寒假，一些小孩儿会被带着去旅游，我很幸运地就和父母及他们的朋友去了东北黑龙江玩。</p>
+        <div style="margin:4px 0 18px;"><button type="button" class="expand-btn" onclick="var m=document.getElementById('h25-full'),b=this; if(m.hasAttribute('hidden')){m.removeAttribute('hidden');b.textContent='收起全文 ▴';}else{m.setAttribute('hidden','');b.textContent='展开全文 ▾';}">展开全文 ▾</button></div>
+        <div id="h25-full" hidden>
+          <p class="pbody">这样想来，前段时间很流行的“南方小土豆”感受到的冲击，我在十岁就感受到了。特别冷的天，还好没什么风，天还没完全黑下来，我们就被迎进了一家临着一条河的小院。虽然小孩儿依旧贪玩，但在吸气都干干冷冷的天里，满地雪白。我们被风雪吸引着，又被风雪劝阻着，进了篱笆白墙里。</p>
+          <p class="pbody">招待我们的应该是一家人，或者说像一家人一样的一群朋友。东北的蓝莓汁很好喝，酸酸甜甜的，果粒很大。那些玻璃瓶带着盖儿，用掌心托上点空气那么一拍瓶底，盖子就开了。然后随着酸酸甜甜的味道散开，一打子酒就被拎上了餐桌。</p>
+          <p class="pbody">那个时候的我是什么想法，我已然不记得了。但现在想来，那些招待我们的大伯，显然是非常符合我对“北方人”的认识的。脸是一点儿都记不得了，他们只在我的记忆里留下了豪迈的笑，和一个玻璃杯里晃荡着的，清透的，微黄色的啤酒。</p>
+          <p class="pbody">作为一个十岁小女孩儿，都被劝着喝了酒。其他的男孩子可想而知。长辈们觉得好玩，把酒杯一推，像围着戏台子看唱段，看自己的从前，看编好的故事。小孩们也觉得好玩，伸手一接，全然不顾地闯上戏台，学着演别人的故事。然而孩子们毕竟还不是这场戏的“角儿”，于是乎又带上点扭捏的羞怯，装作是酒意爬上脸，只叫人分不清。</p>
+          <p class="pbody">大笑着的豪饮，微皱眉的浅啜，这是我在此之前对喝酒的全部了解。书籍、影视给“酒”在小孩儿世界留下的，都是些朦胧又美好的东西。既然写儿时记忆，除此之外“酒”背后的认识，不写也罢。但便是如此，第一次的尝试，也在无尽想象里，戳破了一个角。</p>
+          <p class="pbody">微凉带苦，咂巴着嘴，我对父母劝着的“少喝一点”试出的味道非常不满。一定是太少了，没尝出来，我想。于是我再次拿起酒杯，含上一大口，只在小小的口腔里留下了一道小小的空。气泡密密麻麻地升起来，带着凉意戳上腮帮，再顺着滑进嗓子。我只觉得彼时喉咙内里的寒，透过了皮肉，映在外边儿，然后激起一阵鸡皮疙瘩。又或许我的鸡皮疙瘩也还没起来，只是那苦味，和微不足道的甘甜久久不散。</p>
+          <p class="pbody">凭借着新奇，我还是喝完了那小小的一杯酒，然后又凭借着喜欢，喝下了好多瓶酸酸甜甜的蓝莓汁。</p>
+        </div>
+      </div>
+      <div class="hour-post photo reveal reveal-delay-2">
+        <p class="pno">No.2</p>
+        <p class="ptitle">奔向自由的荒野</p>
+        <div class="post-imgs two">
+          <img src="images/h25-wild-1.jpg" alt="荒野日落，人与远处的山影">
+          <img src="images/h25-wild-2.jpg" alt="海岸礁石前，戴白帽的背影">
+          <img src="images/h25-wild-3.jpg" alt="开满白色小花的绿色山坡">
+          <img src="images/h25-wild-4.jpg" alt="草坡尽头是海与绿色海岬">
+        </div>
+      </div>
+      <div class="hour-post photo reveal reveal-delay-3">
+        <p class="pno">No.3</p>
+        <p class="ptitle">Carriageworks Farmers’ Market</p>
+        <div class="post-imgs">
+          <img src="images/h25-market-1.jpg" alt="农夫市集：花生酱摊位、当季蔬菜、有机蔬果招牌">
+        </div>
+      </div>
+    </div>
+    <p class="footnote">—— 从这些不在任何 brief 里的字开始，才有了上面所有的作品。</p>
+  </div>
+</section>
+
+<!-- ============ 教育背景 ============ -->
+<section class="block" id="edu">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="num">05 / EDUCATION</p>
+      <h2>教育背景</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item reveal">
+        <div class="school">悉尼大学 · 媒体实践硕士<span class="en">University of Sydney · Master of Media Practice</span></div>
+        <div class="what">毕业项目聚焦 AI 对新闻传播行业的影响，成绩 HD（89/100），并产出一份面向新闻教育的行业分析报告。系统学习新闻写作、战略公关、社交媒体传播与播客制作。</div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="school">意大利 Luiss 大学 · 政治学（哲学与经济学）<span class="en">Luiss Guido Carli · PPE</span></div>
+        <div class="what">三年全额奖学金，GPA 107/110，毕业论文满分。在罗马的三年，学会用另一种语言的逻辑去理解另一种生活。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 技能 ============ -->
+<section class="block" id="skills">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="num">06 / SKILLS</p>
+      <h2>技能</h2>
+      <div class="rule"></div>
+      <p class="lede">在写作之外，也能带来一点什么</p>
+    </div>
+    <div class="skills-grid reveal reveal-delay-1">
+      <div class="skill-category">
+        <h4>AIGC 与工具</h4>
+        <ul>
+          <li>ChatGPT</li>
+          <li>Claude</li>
+          <li>Midjourney</li>
+          <li>AI 辅助文案策划</li>
+          <li>数据分析与创意生成</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>多媒体制作</h4>
+        <ul>
+          <li>Adobe Premiere Pro</li>
+          <li>After Effects</li>
+          <li>Photoshop</li>
+          <li>Final Cut Pro</li>
+          <li>Canva / 播客制作</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>营销与运营</h4>
+        <ul>
+          <li>整合营销 Campaign</li>
+          <li>KOL / KOC 管理</li>
+          <li>媒介投放</li>
+          <li>社群搭建与运营</li>
+          <li>内容活动营销</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h4>数据与语言</h4>
+        <ul>
+          <li>Statista / Google Analytics</li>
+          <li>数据可视化报表</li>
+          <li>中文 · 母语</li>
+          <li>英语 · C1 / 雅思 7.0</li>
+          <li>意大利语 · A2.2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-cta reveal">
+        <h2>Let's Create<br>Together.<span class="zh-sub">一起创造故事。</span></h2>
+        <p>如果你也在寻找一个认可「文字应该良善且服务于普通人」的写作者——能在出版物稿件、新媒体内容、播客脚本与品牌文案之间自如切换，也习惯用 AIGC 工具辅助创作、并对最终内容效果负责——欢迎随时联系我。</p>
+        <div class="footer-mails">
+          <a href="mailto:dongyouwen@gmail.com">dongyouwen@gmail.com</a>
+          <a href="mailto:2750203176@qq.com">2750203176@qq.com</a>
+        </div>
+      </div>
+      <div class="footer-info reveal reveal-delay-1">
+        <h3>联系方式 · CONTACT</h3>
+        <p class="who">董悠文 Stella Dong</p>
+        <p>跨文化数字叙事者</p>
+        <p style="margin-top: 14px;">Email: dongyouwen@gmail.com</p>
+        <p>Mobile: +86-18918701024</p>
+        <p>Wechat: 18918701024</p>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Stella Dong 董悠文. 保留所有权利.</span>
+      <span class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">返回顶部 ↑</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scrolled state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Podcast audio player
+  const audio = document.getElementById('podcast-audio');
+  const overlay = document.getElementById('podcast-overlay');
+  const playBtn = document.getElementById('podcast-play-btn');
+  const playText = document.getElementById('podcast-play-text');
+  const cover = document.getElementById('podcast-cover');
+  overlay.style.position = 'absolute';
+  if (cover) cover.style.position = 'relative';
+  function togglePodcast() {
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = '❚❚';
+      playText.textContent = '正在播放 · 点击暂停';
+    } else {
+      audio.pause();
+      playBtn.textContent = '▶';
+      playText.textContent = '点击试听 · 第一集';
+    }
+  }
+  if (overlay) overlay.addEventListener('click', togglePodcast);
+  audio.addEventListener('ended', () => {
+    playBtn.textContent = '▶';
+    playText.textContent = '点击试听 · 第一集';
+  });
+</script>
+</body>
+</html>
